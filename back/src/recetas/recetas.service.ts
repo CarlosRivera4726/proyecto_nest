@@ -57,6 +57,16 @@ export class RecetasService {
             select: {
               nombre: true
             }
+          },
+          Comentarios: {
+            select: {
+              comentario: true,
+              usuario: {
+                select: {
+                  nombre: true
+                }
+              }
+            }
           }
         }
       }); // se demora 5 horas 
