@@ -8,9 +8,14 @@ import { Response } from 'express';
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-  @Post()
+  @Post('crear')
   create(@Body() createUsuarioDto: CreateUsuarioDto, @Res() res: Response) {
     return this.usuariosService.create(createUsuarioDto, res);
+  }
+
+  @Post('crear-muchos')
+  createMany(@Body() createUsuarioDto: CreateUsuarioDto[], @Res() res: Response) {
+    return this.usuariosService.createMany(createUsuarioDto, res);
   }
 
   @Get()
@@ -19,17 +24,22 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usuariosService.findOne(+id);
+  findOne(@Param('id') id: string, @Res() res: Response) {
+    return this.usuariosService.findOne(+id, res);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuariosService.update(+id, updateUsuarioDto);
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto, @Res() res: Response) {
+    return this.usuariosService.update(+id, updateUsuarioDto, res);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usuariosService.remove(+id);
+  @Delete('borrar/:id')
+  remove(@Param('id') id: string, @Res() res: Response) {
+    return this.usuariosService.remove(+id, res);
+  }
+
+  @Delete('borrar-todos')
+  removeAll(@Body() ids: {id: number}[],@Res() res: Response) {
+    return this.usuariosService.removeMany(ids, res);
   }
 }
