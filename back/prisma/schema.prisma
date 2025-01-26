@@ -37,7 +37,7 @@ model Recetas {
   instrucciones String?
   usuario Usuarios @relation(fields: [id_usuario], references: [id])
   id_usuario Int
-  categoria Categorias @relation(fields: [id_categoria], references: [id])
+  categoria Categorias? @relation(fields: [id_categoria], references: [id])
   id_categoria Int
   fecha_creacion DateTime @default(now())
   ingredientes Ingredientes[]

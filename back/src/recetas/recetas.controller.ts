@@ -1,20 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res } from '@nestjs/common';
 import { RecetasService } from './recetas.service';
 import { CreateRecetaDto } from './dto/create-receta.dto';
 import { UpdateRecetaDto } from './dto/update-receta.dto';
+import { Response } from 'express';
 
 @Controller('recetas')
 export class RecetasController {
   constructor(private readonly recetasService: RecetasService) {}
 
   @Post()
-  create(@Body() createRecetaDto: CreateRecetaDto) {
-    return this.recetasService.create(createRecetaDto);
+  create(@Body() createRecetaDto: CreateRecetaDto, @Res() res: Response) {
+    return this.recetasService.create(createRecetaDto, res);
   }
 
   @Get()
-  findAll() {
-    return this.recetasService.findAll();
+  findAll(@Res() res: Response) {
+    return this.recetasService.findAll(res);
   }
 
   @Get(':id')

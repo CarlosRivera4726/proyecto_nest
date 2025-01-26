@@ -1,10 +1,24 @@
-import { IsNumber } from "class-validator";
+import { IsArray, IsNumber, IsString } from "class-validator";
+import { Ingrediente } from "src/interfaces/IIngredientes";
 
 export class CreateRecetaDto {
+    @IsString()
+    titulo: string
+    
+    @IsString()
+    descripcion?: string
+    
+    @IsString()
+    instrucciones?: string
+    
     @IsNumber()
     id_usuario: number
 
-    titulo: string
-    descripcion?: string
-    instrucciones?: string
+    @IsNumber()
+    id_categoria?: number
+
+    @IsArray()
+    ingredientes: Ingrediente[]
+
 }
+
